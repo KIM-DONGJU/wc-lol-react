@@ -1,3 +1,52 @@
 {
-  "extends": "next/core-web-vitals"
+  "root": true,
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": ["react", "@typescript-eslint", "react-hooks", "jsx-a11y", "prettier"],
+  "rules": {
+    "react/jsx-max-props-per-line": [
+      "error",
+      {
+        "when": "multiline",
+        "maximum": 1
+      }
+    ],
+    "react/jsx-first-prop-new-line": ["error", "multiline"],
+    "react/jsx-closing-bracket-location": ["error", "line-aligned"],
+    "react/jsx-props-no-multi-spaces": "error",
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "callbacksLast": true,
+        "shorthandFirst": true,
+        "noSortAlphabetically": false,
+        "reservedFirst": true
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "semi": true,
+        "tabWidth": 2,
+        "singleQuote": true,
+        "printWidth": 100,
+        "trailingComma": "es5"
+      }
+    ],
+    "react/react-in-jsx-scope": "off"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
