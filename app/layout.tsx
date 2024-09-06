@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.scss';
-
-const inter = Inter({ subsets: ['latin'] });
+import Link from 'next/link';
+import { routes } from '@/constants/routes';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'WC-LOL',
@@ -16,8 +16,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <div>navs</div>
+      <body>
+        <header className="flex justify-between">
+          <p className="text-xl text-primary">WC-LOL</p>
+          <div className="text-xl flex justify-between items-center gap-x-8">
+            <Link href={routes.userList}>유저 목록</Link>
+            <p className="h-5 border-l border-white"></p>
+            <Link href={routes.userList}>유저 분석</Link>
+            <p className="h-5 border-l border-white"></p>
+            <Link href={routes.userList}>대전 생성</Link>
+          </div>
+          <div className="flex gap-x-3 items-center">
+            <Image alt="person" height="30" src="icons/person.svg" width="30" />
+            <p className="text-xl font-medium">LOGIN</p>
+          </div>
+        </header>
         <div>{children}</div>
       </body>
     </html>
