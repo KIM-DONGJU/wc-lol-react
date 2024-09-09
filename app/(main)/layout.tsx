@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { routes } from '@/constants/routes';
 
-import './globals.scss';
+import '@/app/globals.scss';
 
 const queryClient = new QueryClient();
 
