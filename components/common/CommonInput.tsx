@@ -24,12 +24,12 @@ export default function CommonInput({
 
   return (
     <label
-      className="flex items-center rounded-3xl px-4 py-3 outline outline-1 focus-within:outline-2 outline-white focus-within:outline-primary"
+      className="flex items-center rounded-3xl max-sm:rounded-full px-4 py-3 outline outline-1 focus-within:outline-2 outline-white focus-within:outline-primary max-w-[90%]"
       style={{ width, height }}
     >
-      <SearchIcon width="28px" />
+      <SearchIcon className="min-w-6" width="28px" />
       <input
-        className="ml-3 text-white bg-none bg-transparent outline-none"
+        className="w-full ml-3 text-white bg-none bg-transparent outline-none"
         placeholder={placeholder}
         type={type}
         value={value}

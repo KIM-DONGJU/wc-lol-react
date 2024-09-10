@@ -8,3 +8,30 @@
   background-color: #000;
   font-family: 'Pretendard';
 }
+
+@media screen and (max-width: 639px) {
+  html,
+  body {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 459px) {
+  html,
+  body {
+    font-size: 10px;
+  }
+}
+
+html,
+body,
+div {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+div::-webkit-scrollbar {
+  display: none;
+}
