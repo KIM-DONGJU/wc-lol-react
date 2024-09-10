@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <QueryClientProvider client={queryClient}>
-      <html lang="en">
+      <html className="w-full max-w-screen-xl mx-auto p-4 text-white" lang="en">
         <body>
           <header className="flex justify-between">
             <p className="text-xl text-primary">WC-LOL</p>
@@ -41,7 +41,7 @@ export default function RootLayout({
               </Link>
             </div>
           </header>
-          <div>{children}</div>
+          <div className="px-8">{children}</div>
         </body>
       </html>
     </QueryClientProvider>

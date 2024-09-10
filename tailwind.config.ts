@@ -14,6 +14,7 @@ const config: Config = {
       },
       colors: {
         primary: '#00E3F1',
+        'opacity-white': 'rgba(255, 255, 255, 0.08)',
       },
     },
   },
