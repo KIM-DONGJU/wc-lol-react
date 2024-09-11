@@ -38,7 +38,7 @@ export default function RootLayout({
               <Link className="flex gap-x-3 items-center" href={routes.userList}>
                 <Image
                   alt="person"
-                  className="max-sm:w-[20px] max-sm:h-[20px]"
+                  className="max-sm:w-5 max-sm:h-5"
                   height="30"
                   src="icons/person.svg"
                   width="30"
