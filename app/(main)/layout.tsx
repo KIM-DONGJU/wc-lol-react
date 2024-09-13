@@ -17,11 +17,11 @@ export default function RootLayout({
 }>) {
   return (
     <QueryClientProvider client={queryClient}>
-      <html lang="en">
+      <html className="w-full max-w-screen-xl mx-auto p-4 text-opacity-white-80" lang="en">
         <body>
-          <header className="flex justify-between">
+          <header className="flex justify-between items-center">
             <p className="text-xl text-primary">WC-LOL</p>
-            <div className="text-xl flex justify-between items-center gap-x-8">
+            <div className="text-xl flex justify-between items-center gap-x-8 max-sm:gap-x-4">
               <Link className="hover:text-primary" href={routes.userList}>
                 유저 목록
               </Link>
@@ -36,12 +36,18 @@ export default function RootLayout({
             </div>
             <div className="flex gap-x-3 items-center">
               <Link className="flex gap-x-3 items-center" href={routes.userList}>
-                <Image alt="person" height="30" src="icons/person.svg" width="30" />
-                <p className="text-xl font-medium">LOGIN</p>
+                <Image
+                  alt="person"
+                  className="max-sm:w-5 max-sm:h-5"
+                  height="30"
+                  src="icons/person.svg"
+                  width="30"
+                />
+                <p className="text-xl font-medium">Login</p>
               </Link>
             </div>
           </header>
-          <div>{children}</div>
+          <div className="px-8">{children}</div>
         </body>
       </html>
     </QueryClientProvider>
