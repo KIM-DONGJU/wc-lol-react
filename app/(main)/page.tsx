@@ -32,12 +32,12 @@ export default function Home() {
   };
 
   return (
-    <div className="mt-6 py-8 px-5 w-full h-screen max-h-[calc(100vh-138px)] bg-opacity-white rounded-3xl">
+    <div className="mt-6 py-8 px-5 w-full h-screen max-h-[calc(100vh-138px)] bg-opacity-white-8 rounded-3xl">
       <div className="w-full flex justify-center items-center">
         <CommonInput placeholder="이름, 닉네임 검색" value={searchUser} onChange={setSearchUser} />
       </div>
       <div className="h-full flex flex-col mt-8">
-        <header className="w-full h-15 grid grid-cols-user-list-table text-xl items-center gap-x-2 bg-zinc-900">
+        <header className="w-full h-15 grid grid-cols-user-list-table text-xl items-center gap-x-2 bg-opacity-white-5 border-b border-white">
           {userListTableHeader.map((header) => (
             <p key={header} className="text-center">
               {header}
@@ -49,7 +49,7 @@ export default function Home() {
             searchData.map((groupMember) => (
               <div
                 key={groupMember.id}
-                className="w-full h-15 grid grid-cols-user-list-table text-xl text-center items-center gap-x-2 border-b border-opacity-white"
+                className="w-full h-15 grid grid-cols-user-list-table text-xl text-center items-center gap-x-2 border-b border-opacity-white-50"
               >
                 <p>{groupMember.name}</p>
                 <p>{groupMember.nickname}</p>

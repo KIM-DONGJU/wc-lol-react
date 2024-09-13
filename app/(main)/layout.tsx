@@ -17,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <QueryClientProvider client={queryClient}>
-      <html className="w-full max-w-screen-xl mx-auto p-4 text-white" lang="en">
+      <html className="w-full max-w-screen-xl mx-auto p-4 text-opacity-white-80" lang="en">
         <body>
           <header className="flex justify-between items-center">
             <p className="text-xl text-primary">WC-LOL</p>
@@ -43,7 +43,7 @@ export default function RootLayout({
                   src="icons/person.svg"
                   width="30"
                 />
-                <p className="text-xl font-medium">LOGIN</p>
+                <p className="text-xl font-medium">Login</p>
               </Link>
             </div>
           </header>

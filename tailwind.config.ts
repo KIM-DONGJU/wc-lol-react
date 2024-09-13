@@ -22,7 +22,10 @@ const config: Config = {
       colors: {
         primary: '#00E3F1',
         secondary: '#43ffbe',
-        'opacity-white': 'rgba(255, 255, 255, 0.08)',
+        'opacity-white-50': 'rgba(255, 255, 255, 0.5)',
+        'opacity-white-80': 'rgba(255, 255, 255, 0.8)',
+        'opacity-white-8': 'rgba(255, 255, 255, 0.08)',
+        'opacity-white-5': 'rgba(255, 255, 255, 0.05)',
       },
       gridTemplateColumns: {
         'user-list-table': '2fr 3fr 1fr 1fr 1fr 1fr 1fr',
