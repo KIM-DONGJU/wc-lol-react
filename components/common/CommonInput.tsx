@@ -11,7 +11,6 @@ interface CommonInputProps {
 }
 
 export default function CommonInput({
-  height = '54px',
   placeholder,
   type = 'text',
   width = '494px',
@@ -24,10 +23,10 @@ export default function CommonInput({
 
   return (
     <label
-      className="flex items-center rounded-3xl max-sm:rounded-full px-4 py-3 outline outline-1 focus-within:outline-2 outline-white focus-within:outline-primary max-w-[90%]"
-      style={{ width, height }}
+      className="flex items-center rounded-3xl max-sm:rounded-full px-4 py-3 outline outline-1 focus-within:outline-2 outline-white focus-within:outline-primary max-w-[90%] h-14"
+      style={{ width }}
     >
-      <SearchIcon className="min-w-6" width="28px" />
+      <SearchIcon className="min-w-6 w-7" />
       <input
         className="w-full ml-3 text-white bg-none bg-transparent outline-none"
         placeholder={placeholder}

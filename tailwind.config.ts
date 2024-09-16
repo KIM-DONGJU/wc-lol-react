@@ -15,9 +15,12 @@ const config: Config = {
       height: {
         15: '3.75rem',
       },
+      flex: {
+        '1': '1 1 0',
+      },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-primary-100':
+          'linear-gradient(270deg, rgba(225, 253, 255, 0) 0%, rgba(0, 227, 241, 0.4) 100%)',
       },
       colors: {
         primary: '#00E3F1',
@@ -29,6 +32,7 @@ const config: Config = {
       },
       gridTemplateColumns: {
         'user-list-table': '2fr 3fr 1fr 1fr 1fr 1fr 1fr',
+        'user-stats-table': '2fr 2fr 2fr 2fr 4fr',
       },
     },
   },
