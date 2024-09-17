@@ -5,9 +5,9 @@ import { Position } from '@/interfaces/position';
 export interface LOLChampion {
   key: number;
   id: string;
-  name: string
+  name: string;
   image_url: string;
-  position: Position[]
+  position: Position[];
 }
 
 export const getLOLChampions = async () => {
