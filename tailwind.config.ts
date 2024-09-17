@@ -25,8 +25,9 @@ const config: Config = {
       colors: {
         primary: '#00E3F1',
         secondary: '#43ffbe',
-        'opacity-white-50': 'rgba(255, 255, 255, 0.5)',
         'opacity-white-80': 'rgba(255, 255, 255, 0.8)',
+        'opacity-white-50': 'rgba(255, 255, 255, 0.5)',
+        'opacity-white-25': 'rgba(255, 255, 255, 0.25)',
         'opacity-white-8': 'rgba(255, 255, 255, 0.08)',
         'opacity-white-5': 'rgba(255, 255, 255, 0.05)',
       },

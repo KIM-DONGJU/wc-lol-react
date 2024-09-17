@@ -2,16 +2,15 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
+import Image from 'next/image';
 
 import { groupMembersQueryKey } from '@/queries/groupMembersQueryKey';
 import { LOLChampionsQueryKey } from '@/queries/LOLChampionsQueryKey';
 import { getGroupMembers, type GroupMember } from '@/apis/groupMembers';
 import { getLOLChampions, type LOLChampion } from '@/apis/LOLChampions';
-import { POSITION_KR } from '@/constants/position';
 import type { SearchPosition, SearchPositionKR } from '@/interfaces/position';
 
 import CommonInput from '@/components/common/CommonInput';
-import Image from 'next/image';
 
 export default function UserStats() {
   const { data } = useQuery<GroupMember[]>({
@@ -58,27 +57,7 @@ export default function UserStats() {
   const [selectPosition, setSelectPosition] = useState<SearchPosition>('all');
 
   const mainAndSubPositionMembers = data
-    ?.filter((groupMember) => {
-      if (
-        selectPosition !== 'all' &&
-        groupMember.mainPosition !== selectPosition &&
-        groupMember.subPosition !== selectPosition
-      ) {
-        return false;
-      }
-
-      const trimmedSearchUser = searchUser.trim();
-      if (
-        trimmedSearchUser &&
-        !groupMember.nickname.includes(trimmedSearchUser) &&
-        !groupMember.name.includes(trimmedSearchUser)
-      ) {
-        return false;
-      }
-
-      return true;
-    })
-    .flatMap((groupMember) => {
+    ?.flatMap((groupMember) => {
       const mainAndSubPositionMembersWithScore = [
         {
           ...groupMember,
@@ -97,35 +76,52 @@ export default function UserStats() {
 
       return mainAndSubPositionMembersWithScore;
     })
+    ?.filter((groupMember) => {
+      if (selectPosition !== 'all' && groupMember.position !== selectPosition) {
+        return false;
+      }
+
+      const trimmedSearchUser = searchUser.trim();
+      if (
+        trimmedSearchUser &&
+        !groupMember.nickname.includes(trimmedSearchUser) &&
+        !groupMember.name.includes(trimmedSearchUser)
+      ) {
+        return false;
+      }
+
+      return true;
+    })
     .sort((a, b) => b.score - a.score);
 
+  const { data: champions } = useQuery<LOLChampion[]>({
+    queryKey: LOLChampionsQueryKey.getLOLChampions(),
+    queryFn: () => getLOLChampions(),
+    staleTime: 1000 * 60 * 60,
+  });
 
-    const { data: champions } = useQuery<LOLChampion[]>({
-      queryKey: LOLChampionsQueryKey.getLOLChampions(),
-      queryFn: () => getLOLChampions(),
-      staleTime: 1000 * 60 * 60,
-    });
-  
-    // useMemo를 사용하기에는 적은 데이터지만, 이름/닉네임 검색을 할 때마다 불필요하게 re-rendering이 발생되는 것을 방지하기 위해 사용
-    const championImageUrls = useMemo(() => {
-      if (!champions) return {}; // champions가 falsy일 때 빈 객체 반환
-    
-      return champions.reduce((acc, champion) => {
+  // useMemo를 사용하기에는 적은 데이터지만, 이름/닉네임 검색을 할 때마다 불필요하게 re-rendering이 발생되는 것을 방지하기 위해 사용
+  const championImageUrls = useMemo(() => {
+    if (!champions) return {}; // champions가 falsy일 때 빈 객체 반환
+
+    return champions.reduce(
+      (acc, champion) => {
         acc[champion.id] = champion.image_url;
         return acc;
-      }, {} as Record<string, string>);
-    }, [champions]);
-    
+      },
+      {} as Record<string, string>
+    );
+  }, [champions]);
 
   return (
     <div className="mt-6 py-8 px-5 w-full flex-1 flex flex-col bg-opacity-white-8 rounded-3xl">
       <div className="w-full flex justify-center items-center">
         <CommonInput placeholder="이름, 닉네임 검색" value={searchUser} onChange={setSearchUser} />
       </div>
-      <div className="mt-8 w-full border border-opacity-white-80 rounded overflow-hidden">
+      <div className="mt-8 w-full border border-opacity-white-50 rounded overflow-hidden">
         <table className="w-full h-15 border-spacing-0">
           <tbody>
-            <tr className="divide-x divide-opacity-white-80">
+            <tr className="divide-x divide-opacity-white-50">
               {searchPositionTypeList.map((position) => (
                 <td key={position.value} className="w-1/6 text-center">
                   <button
@@ -155,24 +151,34 @@ export default function UserStats() {
             mainAndSubPositionMembers.map((groupMember) => (
               <div
                 key={`${groupMember.id}-${groupMember.position}`}
-                className="w-full h-15 grid grid-cols-user-stats-table grid- text-xl text-center items-center gap-x-2 border-b border-opacity-white-50"
+                className="w-full h-15 grid grid-cols-user-stats-table grid- text-xl text-center items-center gap-x-2 border-b border-opacity-white-25"
               >
                 <p>{groupMember.name}</p>
                 <p>{groupMember.nickname}</p>
                 <p>{groupMember.score}</p>
-                <p>{POSITION_KR[groupMember.position]}</p>
+                <div className="flex justify-center items-center">
+                  <Image
+                    alt="top"
+                    className="w-7 h-7"
+                    height={28}
+                    src={`/icons/position-${groupMember.position}.svg`}
+                    width={28}
+                  />
+                </div>
                 <div className="flex gap-x-3 items-center overflow-x-auto">
                   {groupMember.most_champions?.map((champion) => {
                     return (
-                      // championImageUrls[champion]이 있을 때만 Image를 렌더링
                       championImageUrls[champion] && (
-                        <img
+                        <Image
                           key={`${groupMember.id}-${champion}`}
                           alt={champion}
                           className="w-10 h-10 shadow-md"
+                          height={40}
                           src={`${championImageUrls[champion]}`}
+                          width={40}
                         />
-                      ))
+                      )
+                    );
                   })}
                 </div>
               </div>

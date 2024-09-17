@@ -1,4 +1,4 @@
-import SearchIcon from '@/public/icons/magnifying-glass.svg';
+import Image from 'next/image';
 
 interface CommonInputProps {
   type?: string;
@@ -23,10 +23,17 @@ export default function CommonInput({
 
   return (
     <label
-      className="flex items-center rounded-3xl max-sm:rounded-full px-4 py-3 outline outline-1 focus-within:outline-2 outline-white focus-within:outline-primary max-w-[90%] h-14"
+      className="flex items-center rounded-3xl max-sm:rounded-full px-4 py-3 outline outline-1 focus-within:outline-2 outline-opacity-white-50 focus-within:outline-primary max-w-[90%] h-14"
       style={{ width }}
     >
-      <SearchIcon className="min-w-6 w-7" />
+      <Image
+        alt="search-icon"
+        className="w-7 h-7 stroke-white"
+        color="white"
+        height="28"
+        src="icons/magnifying-glass.svg"
+        width="28"
+      />
       <input
         className="w-full ml-3 text-white bg-none bg-transparent outline-none"
         placeholder={placeholder}
