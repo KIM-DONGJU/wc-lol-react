@@ -9,6 +9,7 @@ import { getGroupMembers, type GroupMember } from '@/apis/groupMembers';
 import type { Position } from '@/interfaces/position';
 
 import CommonInput from '@/components/common/CommonInput';
+import CommonPageWrapper from '@/components/common/CommonPageWrapper';
 
 export default function Home() {
   const { data: groupMembers } = useQuery<GroupMember[]>({
@@ -34,11 +35,11 @@ export default function Home() {
   };
 
   return (
-    <div className="mt-6 py-8 px-5 w-full h-screen max-h-[calc(100vh-138px)] bg-opacity-white-8 rounded-3xl">
+    <CommonPageWrapper>
       <div className="w-full flex justify-center items-center">
         <CommonInput placeholder="이름, 닉네임 검색" value={searchUser} onChange={setSearchUser} />
       </div>
-      <div className="h-full flex flex-col mt-8">
+      <div className="flex-1 flex flex-col mt-8">
         <header className="w-full h-15 grid grid-cols-user-list-table text-xl items-center gap-x-2 bg-opacity-white-5 border-b border-white">
           {userListTableHeader.map((header) => (
             <p key={header} className="text-center">
@@ -46,7 +47,7 @@ export default function Home() {
             </p>
           ))}
         </header>
-        <div className="h-full max-h-[calc(100%-138px)] overflow-auto">
+        <div className="flex-1 overflow-auto">
           {searchData &&
             searchData.map((groupMember) => (
               <div
@@ -64,6 +65,6 @@ export default function Home() {
             ))}
         </div>
       </div>
-    </div>
+    </CommonPageWrapper>
   );
 }

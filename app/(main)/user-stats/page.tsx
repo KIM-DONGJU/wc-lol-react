@@ -11,6 +11,7 @@ import { getLOLChampions, type LOLChampion } from '@/apis/LOLChampions';
 import type { SearchPosition, SearchPositionKR } from '@/interfaces/position';
 
 import CommonInput from '@/components/common/CommonInput';
+import CommonPageWrapper from '@/components/common/CommonPageWrapper';
 
 export default function UserStats() {
   const { data } = useQuery<GroupMember[]>({
@@ -114,7 +115,7 @@ export default function UserStats() {
   }, [champions]);
 
   return (
-    <div className="mt-6 py-8 px-5 w-full flex-1 flex flex-col bg-opacity-white-8 rounded-3xl">
+    <CommonPageWrapper>
       <div className="w-full flex justify-center items-center">
         <CommonInput placeholder="이름, 닉네임 검색" value={searchUser} onChange={setSearchUser} />
       </div>
@@ -185,6 +186,6 @@ export default function UserStats() {
             ))}
         </div>
       </div>
-    </div>
+    </CommonPageWrapper>
   );
 }
