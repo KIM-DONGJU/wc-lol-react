@@ -1,5 +1,5 @@
 export const routes = {
-  userList: '/user-list',
-  userTier: '/user-tier',
+  userList: '/',
+  userStats: '/user-stats',
   createMatch: '/create-match',
 };

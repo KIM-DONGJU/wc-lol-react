@@ -26,7 +26,7 @@ export default function RootLayout({
                 유저 목록
               </Link>
               <p className="h-5 border-l border-white"></p>
-              <Link className="hover:text-primary" href={routes.userList}>
+              <Link className="hover:text-primary" href={routes.userStats}>
                 유저 분석
               </Link>
               <p className="h-5 border-l border-white"></p>
