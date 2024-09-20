@@ -12,7 +12,7 @@ import CommonInput from '@/components/common/CommonInput';
 import CommonPageWrapper from '@/components/common/CommonPageWrapper';
 
 export default function Home() {
-  const { data: groupMembers } = useQuery<GroupMember[]>({
+  const { data: groupMembers } = useQuery({
     queryKey: groupMembersQueryKey.getGroupMembers(1),
     queryFn: () => getGroupMembers(1),
     staleTime: 1000 * 60 * 60,

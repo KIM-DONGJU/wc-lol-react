@@ -6,15 +6,15 @@ import Image from 'next/image';
 
 import { groupMembersQueryKey } from '@/queries/groupMembersQueryKey';
 import { LOLChampionsQueryKey } from '@/queries/LOLChampionsQueryKey';
-import { getGroupMembers, type GroupMember } from '@/apis/groupMembers';
-import { getLOLChampions, type LOLChampion } from '@/apis/LOLChampions';
+import { getGroupMembers } from '@/apis/groupMembers';
+import { getLOLChampions } from '@/apis/LOLChampions';
 import type { SearchPosition, SearchPositionKR } from '@/interfaces/position';
 
 import CommonInput from '@/components/common/CommonInput';
 import CommonPageWrapper from '@/components/common/CommonPageWrapper';
 
 export default function UserStats() {
-  const { data } = useQuery<GroupMember[]>({
+  const { data } = useQuery({
     queryKey: groupMembersQueryKey.getGroupMembers(1),
     queryFn: () => getGroupMembers(1),
     staleTime: 1000 * 60 * 60,
@@ -95,7 +95,7 @@ export default function UserStats() {
     })
     .sort((a, b) => b.score - a.score);
 
-  const { data: champions } = useQuery<LOLChampion[]>({
+  const { data: champions } = useQuery({
     queryKey: LOLChampionsQueryKey.getLOLChampions(),
     queryFn: () => getLOLChampions(),
     staleTime: 1000 * 60 * 60,
