@@ -29,7 +29,7 @@ export default function Home() {
 
   const userListTableHeader = ['이름', '닉네임', '탑', '정글', '미드', '원딜', '서폿'];
   const getPositionClass = (member: GroupMember, position: Position) => {
-    if (member.mainPosition === position) return 'text-primary';
+    if (member.mainPosition === position) return 'text-primary-100';
     if (member.subPosition === position) return 'text-secondary';
     return '';
   };

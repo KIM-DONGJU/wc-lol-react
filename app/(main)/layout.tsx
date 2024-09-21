@@ -20,17 +20,17 @@ export default function RootLayout({
       <html className="w-full max-w-screen-xl h-screen mx-auto p-4 text-opacity-white-80" lang="en">
         <body className="h-full flex flex-col">
           <header className="flex justify-between items-center">
-            <p className="text-xl text-primary">WC-LOL</p>
+            <p className="text-xl text-primary-100">WC-LOL</p>
             <div className="text-xl flex justify-between items-center gap-x-8 max-sm:gap-x-4">
-              <Link className="hover:text-primary" href={routes.userList}>
+              <Link className="hover:text-primary-100" href={routes.userList}>
                 유저 목록
               </Link>
               <p className="h-5 border-l border-white"></p>
-              <Link className="hover:text-primary" href={routes.userStats}>
+              <Link className="hover:text-primary-100" href={routes.userStats}>
                 유저 분석
               </Link>
               <p className="h-5 border-l border-white"></p>
-              <Link className="hover:text-primary" href={routes.createMatch}>
+              <Link className="hover:text-primary-100" href={routes.createMatch}>
                 대전 생성
               </Link>
             </div>

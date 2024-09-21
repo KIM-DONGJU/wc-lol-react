@@ -23,7 +23,8 @@ const config: Config = {
           'linear-gradient(270deg, rgba(225, 253, 255, 0) 0%, rgba(0, 227, 241, 0.4) 100%)',
       },
       colors: {
-        primary: '#00E3F1',
+        'primary-100': '#00E3F1',
+        'primary-200': '#AAFAFF',
         secondary: '#43ffbe',
         'opacity-white-80': 'rgba(255, 255, 255, 0.8)',
         'opacity-white-50': 'rgba(255, 255, 255, 0.5)',
