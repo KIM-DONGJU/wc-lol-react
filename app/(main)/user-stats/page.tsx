@@ -8,6 +8,7 @@ import { groupMembersQueryKey } from '@/queries/groupMembersQueryKey';
 import { LOLChampionsQueryKey } from '@/queries/LOLChampionsQueryKey';
 import { getGroupMembers } from '@/apis/groupMembers';
 import { getLOLChampions } from '@/apis/LOLChampions';
+import { ONE_HOUR } from '@/constants/date';
 import type { SearchPosition, SearchPositionKR } from '@/interfaces/position';
 
 import CommonInput from '@/components/common/CommonInput';
@@ -17,7 +18,8 @@ export default function UserStats() {
   const { data } = useQuery({
     queryKey: groupMembersQueryKey.getGroupMembers(1),
     queryFn: () => getGroupMembers(1),
-    staleTime: 1000 * 60 * 60,
+    gcTime: 5 * ONE_HOUR,
+    staleTime: ONE_HOUR,
   });
 
   const [searchUser, setSearchUser] = useState('');
@@ -98,7 +100,8 @@ export default function UserStats() {
   const { data: champions } = useQuery({
     queryKey: LOLChampionsQueryKey.getLOLChampions(),
     queryFn: () => getLOLChampions(),
-    staleTime: 1000 * 60 * 60,
+    gcTime: 5 * ONE_HOUR,
+    staleTime: ONE_HOUR,
   });
 
   // useMemo를 사용하기에는 적은 데이터지만, 이름/닉네임 검색을 할 때마다 불필요하게 re-rendering이 발생되는 것을 방지하기 위해 사용

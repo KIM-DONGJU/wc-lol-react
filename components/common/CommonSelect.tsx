@@ -22,7 +22,7 @@ export default function CommonSelect({
 
   return (
     <label
-      className="flex items-center rounded outline outline-1 focus-within:outline-2 outline-opacity-white-50 focus-within:outline-primary max-w-[90%] h-15 pr-5"
+      className="flex items-center rounded outline outline-1 outline-opacity-white-50 focus-within:outline-primary-100 max-w-[90%] h-15 pr-5"
       style={{ width }}
     >
       <select

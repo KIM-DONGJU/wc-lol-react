@@ -1,9 +1,6 @@
 import { supabase } from '@/lib/supabase';
 
-import type { Position } from '@/interfaces/position';
-import { type GroupMember } from './groupMembers';
-
-interface MatchGroup {
+export interface MatchGroup {
   id: number;
   group_name: string;
   created_at: string;
@@ -11,14 +8,6 @@ interface MatchGroup {
   is_fixed: boolean;
   win_members: number[];
   lose_members: number[];
-}
-
-export interface Match {
-  id: number;
-  group_id: number;
-  created_at: string;
-  wining_team_number: number;
-  teams: Record<Position, GroupMember>[];
 }
 
 export const getMatchGroupsThreeDaysAgo = async () => {

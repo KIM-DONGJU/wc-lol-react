@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 import { groupMembersQueryKey } from '@/queries/groupMembersQueryKey';
 import { getGroupMembers, type GroupMember } from '@/apis/groupMembers';
+import { ONE_HOUR } from '@/constants/date';
 
 import type { Position } from '@/interfaces/position';
 
@@ -15,7 +16,8 @@ export default function Home() {
   const { data: groupMembers } = useQuery({
     queryKey: groupMembersQueryKey.getGroupMembers(1),
     queryFn: () => getGroupMembers(1),
-    staleTime: 1000 * 60 * 60,
+    gcTime: 5 * ONE_HOUR,
+    staleTime: ONE_HOUR,
   });
 
   const [searchUser, setSearchUser] = useState('');

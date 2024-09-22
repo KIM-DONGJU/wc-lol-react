@@ -23,7 +23,7 @@ export default function CommonInput({
 
   return (
     <label
-      className="flex items-center rounded-3xl max-sm:rounded-full px-4 py-3 outline outline-1 focus-within:outline-2 outline-opacity-white-50 focus-within:outline-primary max-w-[90%] h-14"
+      className="flex items-center rounded-3xl max-sm:rounded-full px-4 py-3 outline outline-1 focus-within:outline-2 outline-opacity-white-50 focus-within:outline-primary-100 max-w-[90%] h-14"
       style={{ width }}
     >
       <Image
