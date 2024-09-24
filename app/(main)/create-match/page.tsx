@@ -31,9 +31,9 @@ export default function CreateMatch() {
     }) || [];
 
   const [currentMatchGroupId, setCurrentMatchGroupId] = useState<string | number>('');
-  const currentMatchGroup = matchGroups?.find(
-    (matchGroup) => matchGroup.id === currentMatchGroupId
-  );
+  const currentMatchGroup = matchGroups?.find((matchGroup) => {
+    return matchGroup.id === Number(currentMatchGroupId);
+  });
 
   const { data: matches } = useQuery({
     queryKey: matchesQueryKey.getMatchesByGroupId(currentMatchGroupId as number),
@@ -61,7 +61,7 @@ export default function CreateMatch() {
             대전 생성 +
           </CommonButton>
         </div>
-        <div className="flex flex-col gap-y-10">
+        <div className="h-full flex flex-col gap-y-10">
           {currentMatchGroupId && matches ? (
             matches.map((match, index) => {
               return (

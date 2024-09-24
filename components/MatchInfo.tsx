@@ -33,20 +33,22 @@ export default function MatchInfo({ match, matchName, isFixed }: MatchInfoProps)
                 <span className="text-xl text-opacity-white-80">승리팀을 선택해 주세요.</span>
               )}
             </div>
-            <div className="flex items-center gap-x-[10px]">
-              <button className="w-18 h-7.5 bg-opacity-white-10 text-lg text-opacity-white-80 rounded-full">
-                수정
-              </button>
-              <button className="w-8 h-8 flex justify-center items-center bg-opacity-white-10 rounded-full">
-                <Image
-                  alt="close"
-                  className="w-3 h-3"
-                  height="12"
-                  src="/icons/close.svg"
-                  width="12"
-                />
-              </button>
-            </div>
+            {!isFixed && (
+              <div className="flex items-center gap-x-[10px]">
+                <button className="w-18 h-7.5 bg-opacity-white-10 text-lg text-opacity-white-80 rounded-full">
+                  수정
+                </button>
+                <button className="w-8 h-8 flex justify-center items-center bg-opacity-white-10 rounded-full">
+                  <Image
+                    alt="close"
+                    className="w-3 h-3"
+                    height="12"
+                    src="/icons/close.svg"
+                    width="12"
+                  />
+                </button>
+              </div>
+            )}
           </div>
           <div className="mt-6 grid grid-cols-5 gap-6">
             {match.teams?.map((team, index) =>
