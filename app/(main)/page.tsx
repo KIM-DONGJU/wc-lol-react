@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { groupMembersQueryKey } from '@/queries/groupMembersQueryKey';
 import { getGroupMembers, type GroupMember } from '@/apis/groupMembers';
