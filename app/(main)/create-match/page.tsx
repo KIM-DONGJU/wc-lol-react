@@ -13,6 +13,7 @@ import CommonPageWrapper from '@/components/common/CommonPageWrapper';
 import CommonSelect from '@/components/common/CommonSelect';
 import CommonButton from '@/components/common/CommonButton';
 import MatchInfo from '@/components/MatchInfo';
+import CreateMatchLayer from '@/components/CreateMatchLayer';
 
 export default function CreateMatch() {
   const { data: matchGroups } = useQuery({
@@ -48,38 +49,41 @@ export default function CreateMatch() {
   };
 
   return (
-    <CommonPageWrapper>
-      <div className="h-full flex flex-col">
-        <div className="flex items-center gap-x-8 mb-6">
-          <CommonSelect
-            options={parseMarchGroups}
-            placeholder="대전 그룹 선택"
-            value={currentMatchGroupId}
-            onChange={setCurrentMatchGroupId}
-          />
-          <CommonButton variant="secondary" onClick={onCreateMatch}>
-            대전 생성 +
-          </CommonButton>
+    <>
+      <CommonPageWrapper>
+        <div className="h-full flex flex-col">
+          <div className="flex items-center gap-x-8 mb-6">
+            <CommonSelect
+              options={parseMarchGroups}
+              placeholder="대전 그룹 선택"
+              value={currentMatchGroupId}
+              onChange={setCurrentMatchGroupId}
+            />
+            <CommonButton variant="secondary" width="w-50" onClick={onCreateMatch}>
+              대전 생성 +
+            </CommonButton>
+          </div>
+          <div className="h-full flex flex-col gap-y-10">
+            {currentMatchGroupId && matches ? (
+              matches.map((match, index) => {
+                return (
+                  <MatchInfo
+                    key={match.id}
+                    isFixed={currentMatchGroup?.is_fixed || false}
+                    match={match}
+                    matchName={`${matches.length - index} 경기`}
+                  />
+                );
+              })
+            ) : (
+              <p className="pb-[60px] flex-1 flex justify-center items-center text-2xl text-opacity-white-80">
+                대전 그룹을 선택해 주세요.
+              </p>
+            )}
+          </div>
         </div>
-        <div className="h-full flex flex-col gap-y-10">
-          {currentMatchGroupId && matches ? (
-            matches.map((match, index) => {
-              return (
-                <MatchInfo
-                  key={match.id}
-                  isFixed={currentMatchGroup?.is_fixed || false}
-                  match={match}
-                  matchName={`${matches.length - index} 경기`}
-                />
-              );
-            })
-          ) : (
-            <p className="pb-[60px] flex-1 flex justify-center items-center text-2xl text-opacity-white-80">
-              대전 그룹을 선택해 주세요.
-            </p>
-          )}
-        </div>
-      </div>
-    </CommonPageWrapper>
+      </CommonPageWrapper>
+      <CreateMatchLayer />
+    </>
   );
 }

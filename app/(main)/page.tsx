@@ -1,33 +1,14 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
-
-import { groupMembersQueryKey } from '@/queries/groupMembersQueryKey';
-import { getGroupMembers, type GroupMember } from '@/apis/groupMembers';
-import { ONE_HOUR } from '@/constants/date';
-
+import useGroupMembers from '@/hooks/useGroupMembers';
 import type { Position } from '@/interfaces/position';
+import { type GroupMember } from '@/apis/groupMembers';
 
 import CommonInput from '@/components/common/CommonInput';
 import CommonPageWrapper from '@/components/common/CommonPageWrapper';
 
 export default function Home() {
-  const { data: groupMembers } = useQuery({
-    queryKey: groupMembersQueryKey.getGroupMembers(1),
-    queryFn: () => getGroupMembers(1),
-    gcTime: 5 * ONE_HOUR,
-    staleTime: ONE_HOUR,
-  });
-
-  const [searchUser, setSearchUser] = useState('');
-  const searchData = groupMembers?.filter((groupMember) => {
-    if (!searchUser) return true;
-    return (
-      groupMember.name.includes(searchUser.trim()) ||
-      groupMember.nickname.includes(searchUser.trim())
-    );
-  });
+  const { searchUser, setSearchUser, filteredGroupMembers } = useGroupMembers(1);
 
   const userListTableHeader = ['이름', '닉네임', '탑', '정글', '미드', '원딜', '서폿'];
   const getPositionClass = (member: GroupMember, position: Position) => {
@@ -50,8 +31,8 @@ export default function Home() {
           ))}
         </header>
         <div className="flex-1 overflow-auto">
-          {searchData &&
-            searchData.map((groupMember) => (
+          {filteredGroupMembers &&
+            filteredGroupMembers.map((groupMember) => (
               <div
                 key={groupMember.id}
                 className="w-full h-15 grid grid-cols-user-list-table text-xl text-center items-center gap-x-2 border-b border-opacity-white-50"

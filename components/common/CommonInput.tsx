@@ -13,7 +13,7 @@ interface CommonInputProps {
 export default function CommonInput({
   placeholder,
   type = 'text',
-  width = '494px',
+  width = 'w-[494px]',
   onChange,
   value,
 }: CommonInputProps) {
@@ -23,8 +23,7 @@ export default function CommonInput({
 
   return (
     <label
-      className="flex items-center rounded-3xl max-sm:rounded-full px-4 py-3 outline outline-1 focus-within:outline-2 outline-opacity-white-50 focus-within:outline-primary-100 max-w-[90%] h-14"
-      style={{ width }}
+      className={`flex items-center rounded-3xl max-sm:rounded-full px-4 py-3 outline outline-1 focus-within:outline-2 outline-opacity-white-50 focus-within:outline-primary-100 ${width} max-w-[90%] h-14`}
     >
       <Image
         alt="search-icon"
@@ -35,7 +34,7 @@ export default function CommonInput({
         width="28"
       />
       <input
-        className="w-full ml-3 text-white bg-none bg-transparent outline-none"
+        className="w-full h-14 ml-3 text-white bg-none bg-transparent outline-none"
         placeholder={placeholder}
         type={type}
         value={value}

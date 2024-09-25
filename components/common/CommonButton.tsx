@@ -1,11 +1,11 @@
-type CommonButtonVariant = 'primary' | 'primary-light' | 'secondary';
+type CommonButtonVariant = 'primary' | 'primary-light' | 'secondary' | 'secondary-tonal';
 type CommonButtonRadius = 'rounded' | 'rounded-full';
-type CommonButtonWidth = 'md' | 'full';
 
 interface CommonButtonProps {
   variant: CommonButtonVariant;
   radius?: CommonButtonRadius;
-  width?: CommonButtonWidth;
+  width?: string;
+  height?: string;
   children: React.ReactNode;
   onClick: () => void;
 }
@@ -13,7 +13,8 @@ interface CommonButtonProps {
 export default function CommonButton({
   variant,
   radius = 'rounded',
-  width = 'md',
+  width = 'w-[200px]',
+  height = 'h-15',
   children,
   onClick,
 }: CommonButtonProps) {
@@ -21,16 +22,12 @@ export default function CommonButton({
     primary: 'bg-primary-100 text-white font-bold',
     'primary-light': 'bg-primary-200 text-white font-bold',
     secondary: 'bg-opacity-white-5 border text-primary-200 hover:border-primary-200',
-  };
-
-  const CommonButtonWidthClass = {
-    md: 'w-[200px]',
-    full: 'w-full',
+    'secondary-tonal': 'bg-opacity-white-10 text-opacity-white-80',
   };
 
   return (
     <button
-      className={`${CommonButtonVariantClass[variant]} ${radius} ${CommonButtonWidthClass[width]} h-15 text-xl`}
+      className={`text-lg ${CommonButtonVariantClass[variant]} ${radius} ${width} ${height} text-xl`}
       onClick={onClick}
     >
       {children}

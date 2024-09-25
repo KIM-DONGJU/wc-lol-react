@@ -4,6 +4,8 @@ import Image from 'next/image';
 
 import { type Match } from '@/apis/matches';
 
+import CommonButton from '@/components/common/CommonButton';
+
 interface MatchInfoProps {
   match: Match;
   matchName: string;
@@ -35,18 +37,32 @@ export default function MatchInfo({ match, matchName, isFixed }: MatchInfoProps)
             </div>
             {!isFixed && (
               <div className="flex items-center gap-x-[10px]">
-                <button className="w-18 h-7.5 bg-opacity-white-10 text-lg text-opacity-white-80 rounded-full">
+                <CommonButton
+                  height="h-7.5"
+                  radius="rounded-full"
+                  variant="secondary-tonal"
+                  width="w-8"
+                  onClick={() => {}}
+                >
                   수정
-                </button>
-                <button className="w-8 h-8 flex justify-center items-center bg-opacity-white-10 rounded-full">
-                  <Image
-                    alt="close"
-                    className="w-3 h-3"
-                    height="12"
-                    src="/icons/close.svg"
-                    width="12"
-                  />
-                </button>
+                </CommonButton>
+                <CommonButton
+                  height="h-8"
+                  radius="rounded-full"
+                  variant="secondary-tonal"
+                  width="w-8"
+                  onClick={() => {}}
+                >
+                  <div className="flex justify-center items-center">
+                    <Image
+                      alt="close"
+                      className="w-3 h-3"
+                      height="12"
+                      src="/icons/close.svg"
+                      width="12"
+                    />
+                  </div>
+                </CommonButton>
               </div>
             )}
           </div>
