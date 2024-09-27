@@ -4,19 +4,21 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { groupMembersQueryKey } from '@/queries/groupMembersQueryKey';
-import { getGroupMembers, GroupMember, Position } from '@/apis/groupMembers';
+import { getGroupMembers, type GroupMember } from '@/apis/groupMembers';
+
+import type { Position } from '@/interfaces/position';
 
 import CommonInput from '@/components/common/CommonInput';
 
 export default function Home() {
-  const { data } = useQuery<GroupMember[]>({
+  const { data: groupMembers } = useQuery<GroupMember[]>({
     queryKey: groupMembersQueryKey.getGroupMembers(1),
     queryFn: () => getGroupMembers(1),
     staleTime: 1000 * 60 * 60,
   });
 
   const [searchUser, setSearchUser] = useState('');
-  const searchData = data?.filter((groupMember) => {
+  const searchData = groupMembers?.filter((groupMember) => {
     if (!searchUser) return true;
     return (
       groupMember.name.includes(searchUser.trim()) ||

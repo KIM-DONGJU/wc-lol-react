@@ -17,8 +17,8 @@ export default function RootLayout({
 }>) {
   return (
     <QueryClientProvider client={queryClient}>
-      <html className="w-full max-w-screen-xl mx-auto p-4 text-opacity-white-80" lang="en">
-        <body>
+      <html className="w-full max-w-screen-xl h-screen mx-auto p-4 text-opacity-white-80" lang="en">
+        <body className="h-full flex flex-col">
           <header className="flex justify-between items-center">
             <p className="text-xl text-primary">WC-LOL</p>
             <div className="text-xl flex justify-between items-center gap-x-8 max-sm:gap-x-4">
@@ -26,7 +26,7 @@ export default function RootLayout({
                 유저 목록
               </Link>
               <p className="h-5 border-l border-white"></p>
-              <Link className="hover:text-primary" href={routes.userList}>
+              <Link className="hover:text-primary" href={routes.userStats}>
                 유저 분석
               </Link>
               <p className="h-5 border-l border-white"></p>
@@ -47,7 +47,7 @@ export default function RootLayout({
               </Link>
             </div>
           </header>
-          <div className="px-8">{children}</div>
+          <div className="px-8 flex-1 flex flex-col">{children}</div>
         </body>
       </html>
     </QueryClientProvider>

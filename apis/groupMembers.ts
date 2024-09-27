@@ -1,6 +1,5 @@
+import { Position } from '@/interfaces/position';
 import { supabase } from '@/lib/supabase';
-
-export type Position = 'top' | 'mid' | 'sup' | 'jungle' | 'adc';
 
 export interface User {
   name: string;
@@ -28,8 +27,9 @@ export interface GroupMember {
   userId: string | null;
   positionScore: PositionScore;
   role: 'member' | 'admin';
-  most_champions_main: string[];
+  most_champions_main: string[] | null;
   most_champions_sub: string[] | null;
+  most_champions: string[] | null;
 }
 
 export const getGroupMembers = async (groupId: number) => {
@@ -38,7 +38,5 @@ export const getGroupMembers = async (groupId: number) => {
     .select<'', GroupMember>()
     .eq('groupId', groupId);
 
-  console.log(data, '----');
-
-  return JSON.parse(JSON.stringify(data ?? []));
+  return data || [];
 };
