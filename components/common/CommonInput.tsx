@@ -34,7 +34,7 @@ export default function CommonInput({
         width="28"
       />
       <input
-        className="w-full h-14 ml-3 text-white bg-none bg-transparent outline-none"
+        className="w-full h-14 ml-3 text-white bg-none bg-transparent outline-none text-lg"
         placeholder={placeholder}
         type={type}
         value={value}
