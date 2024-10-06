@@ -1,12 +1,12 @@
 interface CommonSelectProps {
   placeholder: string;
-  width?: string;
   options: {
     label: string;
     value: string | number;
   }[];
   value: string | number;
   onChange: (value: string) => void;
+  className?: string;
 }
 
 export default function CommonSelect({
@@ -14,7 +14,7 @@ export default function CommonSelect({
   options,
   value,
   onChange,
-  width = '356px',
+  className,
 }: CommonSelectProps) {
   const handleOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onChange(e.target.value);
@@ -22,8 +22,7 @@ export default function CommonSelect({
 
   return (
     <label
-      className="flex items-center rounded outline outline-1 outline-opacity-white-50 focus-within:outline-primary-100 max-w-[90%] h-15 pr-5"
-      style={{ width }}
+      className={`flex items-center rounded outline outline-1 outline-opacity-white-50 focus-within:outline-primary-100 max-w-[90%] h-15 pr-5 ${className}`}
     >
       <select
         className="px-5 block w-full h-full bg-transparent text-white text-opacity-80 rounded-md shadow-lg outline-none text-xl"

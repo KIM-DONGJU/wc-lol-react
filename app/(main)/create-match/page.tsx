@@ -150,15 +150,16 @@ export default function CreateMatch() {
       <CommonPageWrapper>
         <div className="h-full flex flex-col">
           <div className="flex justify-between items-center gap-x-8 mb-6">
-            <div className="flex items-center gap-x-8">
+            <div className="flex items-center gap-x-8 gap-y-3">
               <CommonSelect
+                className="w-[22rem] max-w-[45%]"
                 options={parseMarchGroups}
                 placeholder="대전 그룹 선택"
                 value={currentMatchGroupId}
                 onChange={setCurrentMatchGroupId}
               />
               <CommonButton
-                className="w-50 rounded"
+                className="w-50 max-w-[45%] rounded"
                 variant="secondary"
                 onClick={() => setIsVisibleCreateMatchGroupModal(true)}
               >
