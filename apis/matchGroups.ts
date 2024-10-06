@@ -21,3 +21,45 @@ export const getMatchGroupsThreeDaysAgo = async () => {
 
   return data || [];
 };
+
+interface CreateMatchGroupParams {
+  creatorId: string;
+  groupName: string;
+}
+
+export const createMatchGroup = async ({ creatorId, groupName }: CreateMatchGroupParams) => {
+  const { data, error } = await supabase
+    .from('match_groups')
+    .insert([
+      {
+        creator_id: creatorId,
+        group_name: groupName,
+      },
+    ])
+    .select<'', MatchGroup>();
+
+  return data;
+};
+
+interface FixedMatchGroupParams {
+  groupId: number;
+  winnerGroupMemberIds: number[];
+  loserGroupMemberIds: number[];
+}
+export const fixedMatchGroup = async ({
+  groupId,
+  winnerGroupMemberIds,
+  loserGroupMemberIds,
+}: FixedMatchGroupParams) => {
+  const { data } = await supabase
+    .from('match_groups')
+    .update({
+      win_members: winnerGroupMemberIds,
+      lose_members: loserGroupMemberIds,
+      is_fixed: true,
+    })
+    .eq('id', groupId)
+    .select<'', MatchGroup>();
+
+  return data;
+};

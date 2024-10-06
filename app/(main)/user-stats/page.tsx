@@ -39,12 +39,12 @@ export default function UserStats() {
       value: 'top',
     },
     {
-      label: '미드',
-      value: 'mid',
-    },
-    {
       label: '정글',
       value: 'jungle',
+    },
+    {
+      label: '미드',
+      value: 'mid',
     },
     {
       label: '원딜',
@@ -122,10 +122,10 @@ export default function UserStats() {
       <div className="w-full flex justify-center items-center">
         <CommonInput placeholder="이름, 닉네임 검색" value={searchUser} onChange={setSearchUser} />
       </div>
-      <div className="mt-8 w-full border border-opacity-white-50 rounded overflow-hidden">
+      <div className="mt-8 w-full border border-white border-opacity-50 rounded overflow-hidden">
         <table className="w-full h-15 border-spacing-0">
           <tbody>
-            <tr className="divide-x divide-opacity-white-50">
+            <tr className="divide-x divide-white divide-opacity-50">
               {searchPositionTypeList.map((position) => (
                 <td key={position.value} className="w-1/6 text-center">
                   <button
@@ -143,7 +143,7 @@ export default function UserStats() {
         </table>
       </div>
       <div className="mt-8 flex-1 flex flex-col">
-        <header className="w-full h-15 grid grid-cols-user-stats-table text-xl items-center gap-x-2 bg-opacity-white-5 border-b border-white">
+        <header className="w-full h-15 grid grid-cols-user-stats-table text-xl items-center gap-x-2 bg-white bg-opacity-5 border-b border-white">
           {userListTableHeader.map((header) => (
             <p key={header} className="text-center">
               {header}
@@ -155,7 +155,7 @@ export default function UserStats() {
             mainAndSubPositionMembers.map((groupMember) => (
               <div
                 key={`${groupMember.id}-${groupMember.position}`}
-                className="w-full h-15 grid grid-cols-user-stats-table grid- text-xl text-center items-center gap-x-2 border-b border-opacity-white-25"
+                className="w-full h-15 grid grid-cols-user-stats-table grid- text-xl text-center items-center gap-x-2 border-b border-white border-opacity-25"
               >
                 <p>{groupMember.name}</p>
                 <p>{groupMember.nickname}</p>

@@ -26,7 +26,7 @@ export default function CommonSelect({
       style={{ width }}
     >
       <select
-        className="px-5 block w-full h-full bg-transparent text-opacity-white-80 rounded-md shadow-lg outline-none text-xl"
+        className="px-5 block w-full h-full bg-transparent text-white text-opacity-80 rounded-md shadow-lg outline-none text-xl"
         value={value}
         onChange={handleOnChange}
       >
