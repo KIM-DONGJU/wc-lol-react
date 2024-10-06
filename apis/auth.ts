@@ -10,7 +10,6 @@ export const signInWithOauth = async (provider: 'google' | 'discord') => {
       redirectTo,
     },
   });
-
   return data;
 };
 
