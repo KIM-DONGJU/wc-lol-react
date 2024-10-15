@@ -127,7 +127,6 @@ export default function CreateMatch() {
   const [currentMatchGroupId, setCurrentMatchGroupId] = useState<number | string>('');
 
   const currentMatchGroup = matchGroups?.find((matchGroup) => {
-    console.log(matchGroup.id, currentMatchGroupId, '---');
     return matchGroup.id === currentMatchGroupId;
   });
 
