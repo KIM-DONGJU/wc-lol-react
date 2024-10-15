@@ -143,6 +143,7 @@ export default function CreateMatch() {
 
   const [isVisibleFormMatchLayer, setIsVisibleFormMatchLayer] = useState(false);
   const handleSetIsVisibleFormMatchLayer = (isVisible: boolean) => {
+    console.log('isVisible', isVisible);
     if (isVisible) {
       if (!userData?.user?.id) {
         showToast({
@@ -151,10 +152,9 @@ export default function CreateMatch() {
         });
         return;
       }
-      setIsVisibleFormMatchLayer(true);
     }
 
-    setIsVisibleFormMatchLayer(false);
+    setIsVisibleFormMatchLayer(isVisible);
   };
 
   const [isVisibleCreateMatchGroupModal, setIsVisibleCreateMatchGroupModal] = useState(false);
@@ -167,10 +167,8 @@ export default function CreateMatch() {
         });
         return;
       }
-      setIsVisibleCreateMatchGroupModal(true);
     }
-
-    setIsVisibleCreateMatchGroupModal(false);
+    setIsVisibleCreateMatchGroupModal(isVisible);
   };
 
   const onSuccessCreateMatchGroup = async (resMatchGroups: MatchGroup[]) => {
