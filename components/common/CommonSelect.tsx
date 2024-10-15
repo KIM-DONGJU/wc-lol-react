@@ -5,7 +5,7 @@ interface CommonSelectProps {
     value: string | number;
   }[];
   value: string | number;
-  onChange: (value: string) => void;
+  onChange: (value: string | number) => void;
   className?: string;
 }
 
@@ -17,6 +17,12 @@ export default function CommonSelect({
   className,
 }: CommonSelectProps) {
   const handleOnChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const isNumber = !isNaN(parseInt(e.target.value));
+    if (isNumber) {
+      onChange(parseInt(e.target.value));
+      return;
+    }
+
     onChange(e.target.value);
   };
 

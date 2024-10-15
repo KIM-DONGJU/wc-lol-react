@@ -8,7 +8,10 @@ import Image from 'next/image';
 import { matchGroupsQueryKey } from '@/queries/matchGroupsQueryKey';
 import { matchesQueryKey } from '@/queries/matchesQueryKey';
 import { getMatchesByGroupId, type Match } from '@/apis/matches';
+import { getUser } from '@/apis/auth';
+import { authQueryKey } from '@/queries/authQueryKey';
 import { ONE_HOUR } from '@/constants/date';
+import { useToastMessage } from '@/stores/useCommon';
 
 import CommonPageWrapper from '@/components/common/CommonPageWrapper';
 import CommonSelect from '@/components/common/CommonSelect';
@@ -104,6 +107,15 @@ export default function CreateMatch() {
     gcTime: 5 * ONE_HOUR,
   });
 
+  const { data: userData } = useQuery({
+    queryFn: getUser,
+    queryKey: authQueryKey.getUser(),
+    staleTime: ONE_HOUR,
+    gcTime: 5 * ONE_HOUR,
+  });
+
+  const { showToast } = useToastMessage();
+
   const parseMarchGroups =
     matchGroups?.map((matchGroup) => {
       return {
@@ -112,16 +124,16 @@ export default function CreateMatch() {
       };
     }) || [];
 
-  const [currentMatchGroupId, setCurrentMatchGroupId] = useState<string | number>('');
-  const currentMatchGroupIdToNumber = Number(currentMatchGroupId);
+  const [currentMatchGroupId, setCurrentMatchGroupId] = useState<number | string>('');
 
   const currentMatchGroup = matchGroups?.find((matchGroup) => {
-    return matchGroup.id === currentMatchGroupIdToNumber;
+    console.log(matchGroup.id, currentMatchGroupId, '---');
+    return matchGroup.id === currentMatchGroupId;
   });
 
   const { data: matches, isLoading: isMatchesLoading } = useQuery({
-    queryKey: matchesQueryKey.getMatchesByGroupId(currentMatchGroupIdToNumber),
-    queryFn: () => getMatchesByGroupId(currentMatchGroupIdToNumber),
+    queryKey: matchesQueryKey.getMatchesByGroupId(currentMatchGroupId),
+    queryFn: () => getMatchesByGroupId(currentMatchGroupId),
     gcTime: 5 * ONE_HOUR,
     staleTime: ONE_HOUR,
     enabled: currentMatchGroupId !== '',
@@ -131,8 +143,36 @@ export default function CreateMatch() {
     currentMatchGroup && !currentMatchGroup.is_fixed && matches && matches.length > 0;
 
   const [isVisibleFormMatchLayer, setIsVisibleFormMatchLayer] = useState(false);
+  const handleSetIsVisibleFormMatchLayer = (isVisible: boolean) => {
+    if (isVisible) {
+      if (!userData?.user?.id) {
+        showToast({
+          message: '로그인이 필요합니다.',
+          color: 'error',
+        });
+        return;
+      }
+      setIsVisibleFormMatchLayer(true);
+    }
+
+    setIsVisibleFormMatchLayer(false);
+  };
 
   const [isVisibleCreateMatchGroupModal, setIsVisibleCreateMatchGroupModal] = useState(false);
+  const handleSetIsVisibleCreateMatchGroupModal = (isVisible: boolean) => {
+    if (isVisible) {
+      if (!userData?.user?.id) {
+        showToast({
+          message: '로그인이 필요합니다.',
+          color: 'error',
+        });
+        return;
+      }
+      setIsVisibleCreateMatchGroupModal(true);
+    }
+
+    setIsVisibleCreateMatchGroupModal(false);
+  };
 
   const onSuccessCreateMatchGroup = async (resMatchGroups: MatchGroup[]) => {
     queryClient.invalidateQueries({
@@ -161,7 +201,7 @@ export default function CreateMatch() {
               <CommonButton
                 className="w-50 max-w-[45%] rounded"
                 variant="secondary"
-                onClick={() => setIsVisibleCreateMatchGroupModal(true)}
+                onClick={() => handleSetIsVisibleCreateMatchGroupModal(true)}
               >
                 대전 그룹 +
               </CommonButton>
@@ -183,20 +223,20 @@ export default function CreateMatch() {
               isMatchGroupLoading={isMatchGroupLoading}
               isMatchesLoading={isMatchesLoading}
               matches={matches || []}
-              openFormMatchLayer={() => setIsVisibleFormMatchLayer(true)}
+              openFormMatchLayer={() => handleSetIsVisibleFormMatchLayer(true)}
             />
           </div>
         </div>
       </CommonPageWrapper>
       {isVisibleFormMatchLayer && (
         <FormMatchLayer
-          matchGroupId={currentMatchGroupIdToNumber}
-          onClose={() => setIsVisibleFormMatchLayer(false)}
+          matchGroupId={currentMatchGroupId}
+          onClose={() => handleSetIsVisibleFormMatchLayer(false)}
         />
       )}
       {isVisibleCreateMatchGroupModal && (
         <CreateMatchGroupModal
-          onClose={() => setIsVisibleCreateMatchGroupModal(false)}
+          onClose={() => handleSetIsVisibleCreateMatchGroupModal(false)}
           onSuccess={onSuccessCreateMatchGroup}
         />
       )}

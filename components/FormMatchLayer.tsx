@@ -265,7 +265,7 @@ function DragAndDropMatchTableGroupMember({
 }
 
 interface FormMatchLayerProps {
-  matchGroupId: number;
+  matchGroupId: number | string;
   isEdit?: boolean;
   matchId?: number;
   onClose: () => void;
@@ -468,7 +468,9 @@ export default function FormMatchLayer({
       return;
     }
 
-    if (matchTeams.some((team) => Object.values(team).some((user) => !user))) {
+    if (
+      matchTeams.some((team) => Object.values(team).some((user) => Object.keys(user).length === 0))
+    ) {
       showToast({
         message: '팀원을 모두 배치해주세요.',
         color: 'error',

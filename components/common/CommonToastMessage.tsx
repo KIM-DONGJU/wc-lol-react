@@ -34,7 +34,7 @@ export function CommonToastMessage() {
 
   return (
     <div
-      className={`fixed left-0 bottom-0 w-screen p-5 transition-opacity duration-300 ${
+      className={`fixed left-0 bottom-0 w-screen p-5 transition-opacity duration-300 z-20 ${
         visible ? 'opacity-100' : 'opacity-0'
       }`}
     >

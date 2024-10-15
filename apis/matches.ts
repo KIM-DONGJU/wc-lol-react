@@ -11,7 +11,7 @@ export interface Match {
 }
 
 // matchGroupId로 supabase db도 변경할 예정
-export const getMatchesByGroupId = async (matchGroupId: number) => {
+export const getMatchesByGroupId = async (matchGroupId: number | string) => {
   const { data } = await supabase
     .from('matches')
     .select<'', Match>()
@@ -22,7 +22,7 @@ export const getMatchesByGroupId = async (matchGroupId: number) => {
 };
 
 interface CreateMatchParams {
-  groupId: number;
+  groupId: string | number;
   teams: Record<Position, GroupMember>[];
 }
 export const createMatch = async (params: CreateMatchParams) => {

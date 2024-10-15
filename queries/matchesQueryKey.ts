@@ -1,4 +1,4 @@
 export const matchesQueryKey = {
-  getMatchesByGroupId: (groupId: number) => ['matches', { getMatchesByGroupId: groupId }],
+  getMatchesByGroupId: (groupId: number | string) => ['matches', { getMatchesByGroupId: groupId }],
   createMatch: () => ['matches', 'createMatch'],
 };

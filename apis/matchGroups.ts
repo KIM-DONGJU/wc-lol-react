@@ -1,3 +1,4 @@
+import { ONE_DAY } from '@/constants/date';
 import { supabase } from '@/lib/supabase';
 
 export interface MatchGroup {
@@ -11,7 +12,7 @@ export interface MatchGroup {
 }
 
 export const getMatchGroupsThreeDaysAgo = async () => {
-  const threeDaysAgoUTC = new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString();
+  const threeDaysAgoUTC = new Date(Date.now() - 3 * ONE_DAY).toISOString();
 
   const { data } = await supabase
     .from('match_groups')
