@@ -6,17 +6,20 @@ import Image from 'next/image';
 
 import { groupMembersQueryKey } from '@/queries/groupMembersQueryKey';
 import { LOLChampionsQueryKey } from '@/queries/LOLChampionsQueryKey';
-import { getGroupMembers, type GroupMember } from '@/apis/groupMembers';
-import { getLOLChampions, type LOLChampion } from '@/apis/LOLChampions';
+import { getGroupMembers } from '@/apis/groupMembers';
+import { getLOLChampions } from '@/apis/LOLChampions';
+import { ONE_HOUR } from '@/constants/date';
 import type { SearchPosition, SearchPositionKR } from '@/interfaces/position';
 
 import CommonInput from '@/components/common/CommonInput';
+import CommonPageWrapper from '@/components/common/CommonPageWrapper';
 
 export default function UserStats() {
-  const { data } = useQuery<GroupMember[]>({
+  const { data } = useQuery({
     queryKey: groupMembersQueryKey.getGroupMembers(1),
     queryFn: () => getGroupMembers(1),
-    staleTime: 1000 * 60 * 60,
+    gcTime: 5 * ONE_HOUR,
+    staleTime: ONE_HOUR,
   });
 
   const [searchUser, setSearchUser] = useState('');
@@ -36,12 +39,12 @@ export default function UserStats() {
       value: 'top',
     },
     {
-      label: '미드',
-      value: 'mid',
-    },
-    {
       label: '정글',
       value: 'jungle',
+    },
+    {
+      label: '미드',
+      value: 'mid',
     },
     {
       label: '원딜',
@@ -94,10 +97,11 @@ export default function UserStats() {
     })
     .sort((a, b) => b.score - a.score);
 
-  const { data: champions } = useQuery<LOLChampion[]>({
+  const { data: champions } = useQuery({
     queryKey: LOLChampionsQueryKey.getLOLChampions(),
     queryFn: () => getLOLChampions(),
-    staleTime: 1000 * 60 * 60,
+    gcTime: 5 * ONE_HOUR,
+    staleTime: ONE_HOUR,
   });
 
   // useMemo를 사용하기에는 적은 데이터지만, 이름/닉네임 검색을 할 때마다 불필요하게 re-rendering이 발생되는 것을 방지하기 위해 사용
@@ -114,14 +118,14 @@ export default function UserStats() {
   }, [champions]);
 
   return (
-    <div className="mt-6 py-8 px-5 w-full flex-1 flex flex-col bg-opacity-white-8 rounded-3xl">
+    <CommonPageWrapper>
       <div className="w-full flex justify-center items-center">
         <CommonInput placeholder="이름, 닉네임 검색" value={searchUser} onChange={setSearchUser} />
       </div>
-      <div className="mt-8 w-full border border-opacity-white-50 rounded overflow-hidden">
+      <div className="mt-8 w-full border border-white border-opacity-50 rounded overflow-hidden">
         <table className="w-full h-15 border-spacing-0">
           <tbody>
-            <tr className="divide-x divide-opacity-white-50">
+            <tr className="divide-x divide-white divide-opacity-50">
               {searchPositionTypeList.map((position) => (
                 <td key={position.value} className="w-1/6 text-center">
                   <button
@@ -139,7 +143,7 @@ export default function UserStats() {
         </table>
       </div>
       <div className="mt-8 flex-1 flex flex-col">
-        <header className="w-full h-15 grid grid-cols-user-stats-table text-xl items-center gap-x-2 bg-opacity-white-5 border-b border-white">
+        <header className="w-full h-15 grid grid-cols-user-stats-table text-xl items-center gap-x-2 bg-white bg-opacity-5 border-b border-white">
           {userListTableHeader.map((header) => (
             <p key={header} className="text-center">
               {header}
@@ -151,7 +155,7 @@ export default function UserStats() {
             mainAndSubPositionMembers.map((groupMember) => (
               <div
                 key={`${groupMember.id}-${groupMember.position}`}
-                className="w-full h-15 grid grid-cols-user-stats-table grid- text-xl text-center items-center gap-x-2 border-b border-opacity-white-25"
+                className="w-full h-15 grid grid-cols-user-stats-table grid- text-xl text-center items-center gap-x-2 border-b border-white border-opacity-25"
               >
                 <p>{groupMember.name}</p>
                 <p>{groupMember.nickname}</p>
@@ -185,6 +189,6 @@ export default function UserStats() {
             ))}
         </div>
       </div>
-    </div>
+    </CommonPageWrapper>
   );
 }
